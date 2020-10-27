@@ -1,0 +1,25 @@
+{
+  "name": "rest-quest",
+  "version": "0.0.1",
+  "description": "A rest-based game",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rest",
+    "node",
+    "game",
+    "express",
+    "quest"
+  ],
+  "author": "Gabriel Machado",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
