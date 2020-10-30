@@ -14,6 +14,6 @@ exports.signup = (req, res, next) => {
     })
 };
 
-exports.login = (req, res) => {
-    passport.authenticate('local-login')(req, res);
+exports.checkUser = (req, res) => {
+    res.json(req.user);
 };

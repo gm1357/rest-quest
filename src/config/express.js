@@ -15,10 +15,14 @@ module.exports = () => {
     app.use(bodyParser.json());
     app.use(passport.initialize());
     app.use(passport.session());
-
+    
     consign()
         .include('src/api')
         .into(app);
 
+    app.use((err, req, res, next) => {
+        return res.status(err.status || 500).json({ message: err.message });
+    });
+    
     return app;
 }
