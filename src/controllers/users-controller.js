@@ -1,15 +1,17 @@
 const User = require('../models/user');
 
 exports.signup = (req, res, next) => {
-    passport.authenticate('local-signup', (err, user, info) => {
+    User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, err => {
         if (err) {
-            res.sendStatus(400);
-        } else {
-            res.send({
-                message: 'Signed-up successfully'
-            });
+            console.log('error while user register!', err);
+            res.status(400).send({message: err.message});
+            return;
         }
-    })(req, res, next);
+
+        res.send({
+            message: 'Signed-up successfully'
+        });
+    })
 };
 
 exports.login = (req, res) => {
