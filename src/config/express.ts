@@ -20,8 +20,8 @@ app.use(passport.session());
 app.use('/', IndexRouter);
 app.use('/', UsersRouter);
 
-app.use((err, req, res, next) => {
-    return res.status(err.status || 500).json({ message: err.message });
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    return res.status((err as any).status || 500).json({ message: err.message });
 });
 
 export default app;

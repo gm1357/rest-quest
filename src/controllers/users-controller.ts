@@ -1,7 +1,8 @@
+import { NextFunction, Request, Response } from 'express';
 import User from '../models/user';
 
 export class UsersController {
-    signup(req, res, next) {
+    signup(req: Request, res: Response, next: NextFunction) {
         User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, err => {
             if (err) {
                 console.log('error while user register!', err);
@@ -15,7 +16,7 @@ export class UsersController {
         })
     };
 
-    checkUser(req, res) {
+    checkUser(req: Request, res: Response) {
         res.json(req.user);
     };
 }
