@@ -3,8 +3,9 @@ import * as bodyParser from 'body-parser';
 import passport from '../config/passport';
 import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
-import { IndexRouter } from '../api/index';
-import { UsersRouter } from '../api/users';
+import { IndexRouter } from '../routes/index';
+import { UsersRouter } from '../routes/users';
+import { PlacesRouter } from '../routes/places';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(passport.session());
 
 app.use('/', IndexRouter);
 app.use('/', UsersRouter);
+app.use('/', PlacesRouter);
 
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
     return res.status((err as any).status || 500).json({ message: err.message });

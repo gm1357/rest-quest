@@ -4,7 +4,8 @@ import { PassportLocalSchema } from 'mongoose';
 
 const userSchema = new Schema({
     username: { type: String, required: true, trim: true },
-    email: { type: String, required: true, trim: true }
+    email: { type: String, required: true, trim: true },
+    currentArea: { type: Schema.Types.ObjectId, ref: 'Place' }
 }, {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
