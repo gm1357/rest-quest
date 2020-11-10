@@ -12,7 +12,8 @@ dotenv.config();
 let app = express();
 
 mongoose.set('debug',true);
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoUrl = process.env.MONGODB_URI || 'mongodb://mongo:27017/rest-quest';
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 app.use(passport.initialize());

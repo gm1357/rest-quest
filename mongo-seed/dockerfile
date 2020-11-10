@@ -1,0 +1,4 @@
+FROM mongo
+
+COPY places.json /places.json
+CMD mongoimport --host mongo --db rest-quest --collection places --type json --file /places.json --jsonArray
