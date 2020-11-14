@@ -6,6 +6,6 @@ const usersController = new UsersController();
 const router = express.Router();
 
 router.post('/users', usersController.signup);
-router.post('/users/me', authenticateBasic, usersController.checkUser);
+router.get('/users/me', authenticateBasic, usersController.checkUser);
 
 export { router as UsersRouter };
