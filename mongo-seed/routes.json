@@ -1,0 +1,7 @@
+[
+    {
+        "_id": { "$oid": "5fa3588cb9887d18449e1dc9" },
+        "description": "You open the door and enter. As you enter the place, the door behind you closes shut leaving you trapped there.",
+        "nextArea": { "$oid": "5fa3585bb9887d18449e1dc8" }
+    }
+]

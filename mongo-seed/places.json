@@ -1,7 +1,13 @@
 [
     {
-        "name":"Woods",
-        "description":"A wide open area, in the middle of the woods. In front of you there is a big door to some kind of building.",
-        "north":"5fa3588cb9887d18449e1dc9"
+        "_id": { "$oid": "5fa357b0b9887d18449e1dc6" },
+        "name": "Woods",
+        "description": "A wide open area, in the middle of the woods. In front of you there is a big door to some kind of building.",
+        "north": { "$oid": "5fa3588cb9887d18449e1dc9" }
+    },
+    {
+        "_id": { "$oid": "5fa3585bb9887d18449e1dc8" },
+        "name": "The hall",
+        "description": "An elegant hall stands in front of you, with artistic paintings on the walls, a clean red carpet on the groun and a big chandelier on the ceiling. Besides the big door behind you, there are three iron door on each direction."
     }
 ]
