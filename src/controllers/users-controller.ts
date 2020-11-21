@@ -1,21 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
-import User from '../models/user';
-import Place from '../models/place';
+import UserService from '../services/users-service';
+const userService = new UserService();
 
 export class UsersController {
     async signup(req: Request, res: Response, next: NextFunction) {
-        const place = await Place.findOne({name: 'Woods'}).exec();
-        User.register(new User({username: req.body.username, email: req.body.email, currentArea: place}), req.body.password, err => {
-            if (err) {
-                console.log('error while user register!', err);
-                res.status(400).send({message: err.message});
-                return;
-            }
-
-            res.send({
-                message: 'Signed-up successfully'
-            });
-        })
+        try {
+            await userService.signup(req.body.username, req.body.email, req.body.password);
+            res.send({ message: 'Signed-up successfully'});
+        } catch (err) {
+            res.status(400).send({ message: err.message });
+        }
     };
 
     checkUser(req: Request, res: Response) {
