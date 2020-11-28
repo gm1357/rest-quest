@@ -6,6 +6,7 @@ const placeController = new PlacesController();
 const router = express.Router();
 
 router.get('/places/now', authenticateBasic, placeController.showCurrentLocation);
+router.post('/places/now/item', authenticateBasic, placeController.getItem);
 router.post('/places/:direction', authenticateBasic, placeController.goToNextLocation);
 
 export { router as PlacesRouter };

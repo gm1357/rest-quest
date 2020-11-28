@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.post('/users', usersController.signup);
 router.get('/users/me', authenticateBasic, usersController.checkUser);
+router.get('/users/me/inventory', authenticateBasic, usersController.getInventory);
 
 export { router as UsersRouter };

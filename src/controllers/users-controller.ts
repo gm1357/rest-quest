@@ -15,4 +15,9 @@ export class UsersController {
     checkUser(req: Request, res: Response) {
         res.json(req.user);
     };
+
+    async getInventory(req: Request, res: Response) {
+        const inventory = await userService.getInventory(req.user);
+        res.json(inventory);
+    };
 }

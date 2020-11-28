@@ -4,12 +4,23 @@ const placesService = new PlacesService();
 
 export class PlacesController {
 
-    showCurrentLocation = async (req: Request, res: Response, next: NextFunction) => {
+    async showCurrentLocation (req: Request, res: Response, next: NextFunction) {
         const place = await placesService.getCurrentPlace((req.user as any).currentArea);
         res.json(place);
     };
 
-    goToNextLocation = async (req: Request, res: Response, next: NextFunction) => {
+    async getItem(req: Request, res: Response, next: NextFunction) {
+        try {
+            const item = await placesService.getItem((req.user as any).currentArea, req.body.item, (req.user as any).id);
+            res.json({
+                message: `You got ${item.name}`
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async goToNextLocation(req: Request, res: Response, next: NextFunction) {
         try {
             const route = await placesService.goToNextLocation(
                 (req.user as any).currentArea,

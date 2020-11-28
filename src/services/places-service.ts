@@ -1,6 +1,7 @@
 import User from '../models/user';
 import Place from '../models/place';
-import Route from '../models/route'
+import Route from '../models/route';
+import Item from '../models/item';
 
 export default class PlacesService {
     private readonly directions = ['north', 'south', 'west', 'east'];
@@ -16,6 +17,23 @@ export default class PlacesService {
 
         return place;
     };
+
+    async getItem(currentAreaId: any, itemName: string, userId: string) {
+        const itemSearch: any = await Item.findOne({ 'name': itemName });
+        const place: any = await Place.findById(currentAreaId, 'items');
+        const item = place.items.find((item: string) => item == itemSearch?.id);
+
+        if (item == null) {
+            throw { message: `${itemName} was not found on this current place`, status: 404 };
+        }
+
+        let res = await Place.updateOne({ _id: currentAreaId }, { $pull: { items: item }});
+        if (res) {
+            res = await User.updateOne({ _id: userId }, { $push: { inventory: item } });
+        }
+
+        return itemSearch;
+    }
 
     async goToNextLocation(currentAreaId: any, direction: string, userId: any) {
         try {

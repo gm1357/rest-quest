@@ -13,9 +13,23 @@ export default class UsersService {
         }
     };
 
+    async getInventory(userId: any) {
+        const userInventory = await User
+            .findById(userId, '-_id inventory')
+            .populate('inventory', '-_id')
+            .exec();
+        return userInventory;
+    }
+
     private registerUserPromise(username: string, email: string, password: string, place: Document) {
         return new Promise((resolve, reject) => {
-            User.register(new User({ username, email, currentArea: place}), password, err => {
+            const newUser = new User({
+                username,
+                email,
+                currentArea: place,
+                inventory: []
+            });
+            User.register(newUser, password, err => {
                 if (err) {
                     reject(err.message);
                 }
