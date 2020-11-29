@@ -5,7 +5,11 @@
         "target": "es5",
         "noImplicitReturns": true,
         "noImplicitAny": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "lib": ["es6", "dom"],
+        "types": ["reflect-metadata"],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     },
     "include": ["./src/**/*"]
 }

@@ -1,17 +1,24 @@
 import { NextFunction, Request, Response } from 'express';
-import PlacesService from '../services/places-service';
-const placesService = new PlacesService();
+import { inject, injectable } from 'inversify';
+import { SERVICE_IDENTIFIER } from '../constants/identifiers';
+import { IPlacesService } from '../interfaces/places-service-interface';
+import { IPlacesController } from '../interfaces/places-controller-interface';
 
-export class PlacesController {
+@injectable()
+export class PlacesController implements IPlacesController {
 
-    async showCurrentLocation (req: Request, res: Response, next: NextFunction) {
-        const place = await placesService.getCurrentPlace((req.user as any).currentArea);
+    constructor(
+        @inject(SERVICE_IDENTIFIER.IPlacesService) private placesService: IPlacesService
+    ) { }
+
+    showCurrentLocation = async (req: Request, res: Response, next: NextFunction) => {
+        const place = await this.placesService.getCurrentPlace((req.user as any).currentArea);
         res.json(place);
     };
 
-    async getItem(req: Request, res: Response, next: NextFunction) {
+    getItem = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const item = await placesService.getItem((req.user as any).currentArea, req.body.item, (req.user as any).id);
+            const item = await this.placesService.getItem((req.user as any).currentArea, req.body.item, (req.user as any).id);
             res.json({
                 message: `You got ${item.name}`
             });
@@ -20,9 +27,9 @@ export class PlacesController {
         }
     }
 
-    async goToNextLocation(req: Request, res: Response, next: NextFunction) {
+    goToNextLocation = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const route = await placesService.goToNextLocation(
+            const route = await this.placesService.goToNextLocation(
                 (req.user as any).currentArea,
                 req.params.direction,
                 (req.user as any)._id

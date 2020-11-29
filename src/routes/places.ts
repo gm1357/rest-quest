@@ -1,8 +1,10 @@
 import * as express from 'express';
+import container from '../config/installer';
+import { SERVICE_IDENTIFIER } from '../constants/identifiers';
 import authenticateBasic from '../middlewares/authenticateBasic';
-import { PlacesController } from '../controllers/places-controller';
-const placeController = new PlacesController();
+import { IPlacesController } from '../interfaces/places-controller-interface';
 
+const placeController = container.get<IPlacesController>(SERVICE_IDENTIFIER.IPlacesController);
 const router = express.Router();
 
 router.get('/places/now', authenticateBasic, placeController.showCurrentLocation);

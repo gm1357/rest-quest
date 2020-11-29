@@ -1,8 +1,10 @@
 import * as express from 'express';
-import { UsersController } from '../controllers/users-controller';
+import container from '../config/installer';
+import { SERVICE_IDENTIFIER } from '../constants/identifiers';
+import { IUsersController } from '../interfaces/users-controller-interface';
 import authenticateBasic from '../middlewares/authenticateBasic';
-const usersController = new UsersController();
 
+const usersController = container.get<IUsersController>(SERVICE_IDENTIFIER.IUsersController);
 const router = express.Router();
 
 router.post('/users', usersController.signup);

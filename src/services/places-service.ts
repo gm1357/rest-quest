@@ -2,8 +2,11 @@ import User from '../models/user';
 import Place from '../models/place';
 import Route from '../models/route';
 import Item from '../models/item';
+import { injectable } from 'inversify';
+import { IPlacesService } from '../interfaces/places-services-interface';
 
-export default class PlacesService {
+@injectable()
+export default class PlacesService implements IPlacesService {
     private readonly directions = ['north', 'south', 'west', 'east'];
 
     async getCurrentPlace(currentAreaId: any) {

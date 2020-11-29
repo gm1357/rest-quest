@@ -1,9 +1,12 @@
 import User from '../models/user';
 import { Document } from 'mongoose';
 import PlacesService from './places-service';
+import { injectable } from 'inversify';
+import { IUsersService } from '../interfaces/users-service-interface';
 const placesService = new PlacesService();
 
-export default class UsersService {
+@injectable()
+export default class UsersService implements IUsersService {
     async signup(username: string, email: string, password: string) {
         try {
             const place = await placesService.getInitialArea();
