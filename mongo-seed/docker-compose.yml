@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27018:27017
+
+  mongo_seed:
+    image: mongo
+    links:
+      - mongodb
+    volumes:
+      - .:/mongo-seed
+    command:
+      /mongo-seed/mongo-seed.sh

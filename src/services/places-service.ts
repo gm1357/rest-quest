@@ -3,7 +3,7 @@ import Place from '../models/place';
 import Route from '../models/route';
 import Item from '../models/item';
 import { injectable } from 'inversify';
-import { IPlacesService } from '../interfaces/places-services-interface';
+import { IPlacesService } from '../interfaces/places-service-interface';
 
 @injectable()
 export default class PlacesService implements IPlacesService {
