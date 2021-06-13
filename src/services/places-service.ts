@@ -22,7 +22,7 @@ export default class PlacesService implements IPlacesService {
     };
 
     async getItem(currentAreaId: any, itemName: string, userId: string) {
-        const itemSearch: any = await Item.findOne({ 'name': itemName });
+        const itemSearch: any = await Item.findOne({ 'name': itemName.toLocaleLowerCase() });
         const place: any = await Place.findById(currentAreaId, 'items');
         const item = place.items.find((item: string) => item == itemSearch?.id);
 
@@ -53,9 +53,23 @@ export default class PlacesService implements IPlacesService {
                 };
             }
 
-            const route = (await Route.findById(nextRouteId, '-_id'));
+            let route = await Route.findById(nextRouteId, '-_id');
+
+            if ((route as any)['requiredItems'] && (route as any)['requiredItems'].length) {
+                const inventory = (await User.findById(userId, '-_id inventory') as any)['inventory'];
+                if (!(route as any)['requiredItems'].every((requiredItem: string) => inventory.includes(requiredItem))) {
+                    route = route.toObject();
+                    delete (route as any).description;
+                    delete (route as any).requiredItems;
+                    return route;
+                }
+            }
+
             await User.updateOne({ _id: userId }, { currentArea: (route as any).nextArea });
 
+            route = route.toObject();
+            delete (route as any).blocked;
+            delete (route as any).requiredItems;
             return route;
         } catch (err) {
             throw err;

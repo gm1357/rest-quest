@@ -3,5 +3,14 @@
         "_id": { "$oid": "5fa3588cb9887d18449e1dc9" },
         "description": "You open the door and enter. As you enter the place, the door behind you closes shut leaving you trapped there.",
         "nextArea": { "$oid": "5fa3585bb9887d18449e1dc8" }
+    },
+    {
+        "_id": { "$oid": "60c657efa71b920a364d1348" },
+        "description": "You use the old key and exit to the woods.",
+        "blocked": "You try to open the door but without success. There is an rusted keyhole on it.",
+        "requiredItems": [
+            { "$oid": "60c65240a71b920a364d1342" }
+        ],
+        "nextArea": { "$oid": "5fa357b0b9887d18449e1dc6" }
     }
 ]

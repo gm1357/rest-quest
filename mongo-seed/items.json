@@ -1,0 +1,7 @@
+[
+    {
+        "_id": { "$oid": "60c65240a71b920a364d1342" },
+        "name": "old key",
+        "description": "An old rusted key"
+    }
+]

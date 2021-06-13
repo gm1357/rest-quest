@@ -8,6 +8,10 @@
     {
         "_id": { "$oid": "5fa3585bb9887d18449e1dc8" },
         "name": "The hall",
-        "description": "An elegant hall stands in front of you, with artistic paintings on the walls, a clean red carpet on the groun and a big chandelier on the ceiling. Besides the big door behind you, there are three iron door on each direction."
+        "description": "An elegant hall stands in front of you, with artistic paintings on the walls, a clean red carpet on the ground and a big chandelier on the ceiling. Besides the big door behind you, there are three iron door on each direction. An old key lies on the middle of the hall.",
+        "items": [
+            { "$oid": "60c65240a71b920a364d1342" }
+        ],
+        "south": { "$oid": "60c657efa71b920a364d1348" }
     }
 ]
