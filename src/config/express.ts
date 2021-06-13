@@ -1,5 +1,4 @@
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
 import passport from '../config/passport';
 import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
@@ -15,7 +14,7 @@ mongoose.set('debug',true);
 const mongoUrl = process.env.MONGODB_URI || 'mongodb://mongo:27017/rest-quest';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
